@@ -42,9 +42,4 @@ class MenuHomeAdapter(
     override fun getItemCount(): Int {
         return cities.size
     }
-
-    fun updateItem(position: Int) {
-        //notifyItemChanged(position)
-        notifyDataSetChanged()
-    }
 }

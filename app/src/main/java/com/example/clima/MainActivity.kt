@@ -40,12 +40,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun subscribeUI() {
         weatherViewModel.openWeatherResponse.observe(this){
             it?.let { weather ->
-                cities.forEachIndexed { index, model ->
+                cities.forEach { model ->
                     if(weather.name .equals(model.cityEnum.description, true)  ){
                         model.temperature = weather.main.temp.toString()
-                        _adapter.updateItem(index)
                     }
                 }
+                _adapter.notifyDataSetChanged()
             }
         }
     }
