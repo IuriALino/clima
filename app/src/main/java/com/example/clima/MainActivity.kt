@@ -22,7 +22,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = _adapter
         }
-
     }
 
     private val _adapter by lazy {
