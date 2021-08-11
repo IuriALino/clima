@@ -24,14 +24,12 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
                 }
     }
 
-
     override fun initUIComponents() {
         binding.recyclerViewForecast.apply {
             layoutManager = LinearLayoutManager(this@ForecastActivity)
             adapter = _adapter
         }
     }
-
 
     override fun initUIEvents() {
         intent.getStringExtra(ARG_MESSAGE_RES)?.let {

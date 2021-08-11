@@ -14,7 +14,6 @@ import org.koin.core.component.KoinApiExtension
 class WeatherViewModel(
     private val weatherRepository: WeatherRepository
 ) : ViewModel() {
-    //val isLoading = weatherRepository.isloading
 
     private val _openWeatherResponse = MutableLiveData<WeatherResponse?>()
     val openWeatherResponse: LiveData<WeatherResponse?> = _openWeatherResponse
