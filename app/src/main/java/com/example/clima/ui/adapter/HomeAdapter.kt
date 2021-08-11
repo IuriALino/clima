@@ -25,7 +25,7 @@ class HomeAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Model) = with(binding) {
             textViewCity.text = item.cityEnum.description
-            textViewTemperature.text = item.temperature
+            textViewTemperature.text = item.temperature.toString()
             content.setOnClickListener {
                 onItemSelected(item)
             }

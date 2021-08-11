@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.clima.data.source.retrofit.response.WeatherResponse
 import com.example.clima.databinding.RowItemForecastBinding
 
-class ForeCastAdapter (
-    private val forecast : List<WeatherResponse>,
-    private val onItemSelected: (item: WeatherResponse) -> Unit = { }
-) : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
+class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>()
+{
+    var forecast = listOf<WeatherResponse>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             RowItemForecastBinding.inflate(
@@ -19,6 +18,7 @@ class ForeCastAdapter (
             )
         )
     }
+
     //Representation Layout
     inner class ViewHolder(private val binding: RowItemForecastBinding) :
         RecyclerView.ViewHolder(binding.root) {
