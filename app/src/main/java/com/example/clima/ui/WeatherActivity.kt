@@ -1,12 +1,8 @@
 package com.example.clima.ui
 
-import android.app.SearchManager
-import android.content.Context
-import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clima.R
 import com.example.clima.data.CityEnum
