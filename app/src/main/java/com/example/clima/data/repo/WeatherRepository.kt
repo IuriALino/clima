@@ -53,4 +53,33 @@ class WeatherRepository(
             }
         }
     }
+
+    suspend fun fetchForeCast(
+        location: String
+    ) = withContext(IO) {
+        _isLoading.postValue(true)
+        val response = weatherAPIClient.forecast(location)
+        var error: JsonObject? = null
+        when (response) {
+            is HttpResult.Success -> {
+                if (response.data.isSuccessful) {
+                    _isLoading.postValue(false)
+                    return@withContext Pair(response.data.body(), error)
+                } else {
+                    response.data.defaultFailure {
+                        error = it
+                    }
+                    _isLoading.postValue(false)
+                    return@withContext Pair(null, error)
+                }
+            }
+            is HttpResult.Error -> {
+                response.exception.defaultError {
+                    error = it
+                }
+                _isLoading.postValue(false)
+                return@withContext Pair(null, error)
+            }
+        }
+    }
 }

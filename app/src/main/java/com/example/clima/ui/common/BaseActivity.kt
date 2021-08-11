@@ -1,4 +1,4 @@
-package com.example.clima.ui
+package com.example.clima.ui.common
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

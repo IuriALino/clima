@@ -20,4 +20,15 @@ class WeatherAPIClient(
             HttpResult.Error(e)
         }
     }
+
+    @KoinApiExtension
+    suspend fun forecast(
+        location: String
+    ) = withContext(IO) {
+        return@withContext try {
+            HttpResult.Success(retrofit.weatherService().fetchForecast(location))
+        } catch (e: Throwable) {
+            HttpResult.Error(e)
+        }
+    }
 }

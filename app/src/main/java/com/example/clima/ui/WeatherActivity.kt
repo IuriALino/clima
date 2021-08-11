@@ -1,17 +1,16 @@
-package com.example.clima
+package com.example.clima.ui
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clima.data.CityEnum
 import com.example.clima.data.Model
-import com.example.clima.databinding.ActivityMainBinding
-import com.example.clima.ui.BaseActivity
-import com.example.clima.ui.WeatherViewModel
-import com.example.clima.ui.adapter.MenuHomeAdapter
+import com.example.clima.databinding.ActivityWeatherBinding
+import com.example.clima.ui.adapter.HomeAdapter
+import com.example.clima.ui.common.BaseActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
 
 @KoinApiExtension
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
 
     private val weatherViewModel by viewModel<WeatherViewModel>()
 
@@ -19,14 +18,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initUIComponents() {
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(this@WeatherActivity)
             adapter = _adapter
         }
     }
 
     private val _adapter by lazy {
-        MenuHomeAdapter(cities) {
-
+        HomeAdapter(cities) {
         }
     }
 
@@ -44,10 +42,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                         model.temperature = weather.main.temp.toString()
                     }
                 }
-                _adapter.notifyDataSetChanged()
+                with(_adapter) { notifyDataSetChanged() }
             }
         }
     }
 
-    override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityWeatherBinding.inflate(layoutInflater)
 }

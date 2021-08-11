@@ -2,17 +2,14 @@ package com.example.clima.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clima.data.CityEnum
 import com.example.clima.data.Model
 import com.example.clima.databinding.RowItemBinding
 
-class MenuHomeAdapter(
+class HomeAdapter(
     private val cities : List<Model>,
     private val onItemSelected: (item: Model) -> Unit = { }
-) : RecyclerView.Adapter<MenuHomeAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             RowItemBinding.inflate(
