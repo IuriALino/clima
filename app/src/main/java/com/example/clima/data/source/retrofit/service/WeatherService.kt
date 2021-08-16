@@ -1,6 +1,7 @@
 package com.example.clima.data.source.retrofit.service
 
 
+import com.example.clima.BuildConfig
 import com.example.clima.data.source.retrofit.Route
 import com.example.clima.data.source.retrofit.response.ForeCastResponse
 import com.example.clima.data.source.retrofit.response.WeatherResponse
@@ -13,13 +14,13 @@ interface WeatherService {
     @GET(Route.Weather.FETCH_ONE)
     suspend fun fetchWeather(
         @Query("q") location: String,
-        @Query("appid") appid: String = "89364cc68207f58fe536af0a5496c0a1"
+        @Query("appid") appid: String = BuildConfig.PROVIDER_AUTH
     ): Response<WeatherResponse>
 
     @GET(Route.Weather.FETCH_FIVE)
     suspend fun fetchForecast(
         @Query("q") location: String,
-        @Query("appid") appid: String = "89364cc68207f58fe536af0a5496c0a1"
+        @Query("appid") appid: String = BuildConfig.PROVIDER_AUTH
     ): Response<ForeCastResponse>
 
 }

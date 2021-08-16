@@ -10,7 +10,7 @@ import org.koin.core.component.KoinApiExtension
 class WeatherAPIClient(
     private val retrofit: RetrofitClient
 ) {
-    @KoinApiExtension
+
     suspend fun weather(
         location: String
     ) = withContext(IO) {
@@ -21,7 +21,7 @@ class WeatherAPIClient(
         }
     }
 
-    @KoinApiExtension
+
     suspend fun forecast(
         location: String
     ) = withContext(IO) {
