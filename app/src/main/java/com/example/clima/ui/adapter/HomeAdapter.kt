@@ -26,7 +26,7 @@ class HomeAdapter(
         fun bind(item: Model) = with(binding) {
             textViewCity.text = item.cityEnum.description
             textViewTemperature.text = item.temperature.toString()
-            content.setOnClickListener {
+            cvHome.setOnClickListener {
                 onItemSelected(item)
             }
         }
