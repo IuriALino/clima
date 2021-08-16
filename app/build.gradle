@@ -14,15 +14,24 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
         buildConfigField "String", "PROVIDER_AUTH", rootProject.ext.provider_auth
     }
 
     buildTypes {
         release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources false
+            //buildConfigField 'String', 'API_HOST', '"https://api.openweathermap.org"'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
+        debug {
+            debuggable true
             minifyEnabled false
+            shrinkResources false
+            testCoverageEnabled = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
