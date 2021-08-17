@@ -47,9 +47,9 @@
                 android:id="@+id/text_view_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="8dp"
                 android:text="14º"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 card_view:layout_constraintBaseline_toBaselineOf="@+id/text_view_city"
                 card_view:layout_constraintEnd_toStartOf="@+id/imgIcon" />
 

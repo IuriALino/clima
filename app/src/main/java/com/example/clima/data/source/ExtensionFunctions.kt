@@ -6,6 +6,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.net.ConnectException
 import java.net.UnknownHostException
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -108,3 +109,8 @@ fun getCalendarInstanceSPTimeZone(): Calendar {
     return GregorianCalendar.getInstance(timeZone)
 }
 
+fun Double.kelvinToCelsius() : String {
+    val dec = DecimalFormat("###.##")
+    val celsius = this - 273.15
+    return "${dec.format(celsius)} ºC"
+}
