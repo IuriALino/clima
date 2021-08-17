@@ -3,6 +3,9 @@ package com.example.clima.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clima.data.source.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS
+import com.example.clima.data.source.formatToPattern
+import com.example.clima.data.source.parseToDate
 import com.example.clima.data.source.retrofit.response.WeatherResponse
 import com.example.clima.databinding.RowItemForecastBinding
 
@@ -23,7 +26,7 @@ class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>()
     inner class ViewHolder(private val binding: RowItemForecastBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: WeatherResponse) = with(binding) {
-            textViewDate.text = item.dtTxt
+            textViewDate.text = item.dtTxt.parseToDate(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS)?.formatToPattern()
             textViewForecastTemperature.text = item.main.temp.toString()
         }
     }

@@ -1,5 +1,4 @@
 package com.example.clima.data.source
-
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.coroutines.Dispatchers
@@ -7,6 +6,8 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.net.ConnectException
 import java.net.UnknownHostException
+import java.text.SimpleDateFormat
+import java.util.*
 
 suspend fun <T> Response<T>?.defaultFailure(failure: (t: JsonObject) -> Unit) = withContext(
     Dispatchers.IO
@@ -54,3 +55,56 @@ fun Throwable.getFormatedMessage(): String {
         else -> this.message ?: "Ocorreu um erro inesperado"
     }
 }
+
+const val DATE_FORMAT_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss"
+const val DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS = "yyyy-MM-dd'T'HH:mm:ss"
+const val DATE_FORMAT_DD_MM_YYYY = "dd/MM/yyyy"
+const val DATE_FORMAT_YYYY_MM_DD = "yyyy-MM-dd"
+const val DATE_FORMAT_DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy HH:mm:ss"
+const val DATE_FORMAT_DD_MM_YYYY_HH_MM = "dd/MM/yyyy HH:mm"
+const val DATE_FORMAT_HH_MM = "HH:mm:ss"
+
+fun String.parseToDate(
+    pattern: String = DATE_FORMAT_YYYY_MM_DD_HH_MM_SS,
+    locale: Locale = Locale("pt", "BR"),
+    isUTC: Boolean = false
+): Date? {
+    return try {
+        val simpleDateFormat = SimpleDateFormat(
+            pattern,
+            locale
+        )
+
+        var date = simpleDateFormat.parse(this)
+        if (isUTC) {
+            date?.let {
+                val calendar = getCalendarInstanceSPTimeZone()
+                calendar.time = it
+                calendar.add(Calendar.HOUR_OF_DAY, -3)
+                date = calendar.time
+            }
+        }
+        date
+    } catch (ex: Exception) {
+        null
+    }
+}
+
+fun Date.formatToPattern(
+    pattern: String = DATE_FORMAT_DD_MM_YYYY,
+    locale: Locale = Locale("pt", "BR")
+): String {
+    val simpleDateFormat = SimpleDateFormat(
+        pattern,
+        locale
+    )
+
+    return simpleDateFormat.format(this)
+}
+
+fun getCalendarInstanceSPTimeZone(): Calendar {
+    val timeZone = TimeZone.getTimeZone("America/Sao_Paulo")
+    TimeZone.setDefault(timeZone)
+    return GregorianCalendar.getInstance(timeZone)
+}
+
