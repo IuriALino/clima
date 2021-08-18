@@ -1,8 +1,11 @@
 package com.example.clima.ui
 
+import android.app.SearchManager
+import android.content.Context
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clima.R
 import com.example.clima.data.CityEnum
@@ -50,21 +53,7 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_update, menu)
-//        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-//        val item = menu?.findItem(R.id.action_search)
-//        item?.let {
-//            val searchView = it.actionView as SearchView
-//            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-//            searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener,
-//                androidx.appcompat.widget.SearchView.OnQueryTextListener {
-//                override fun onQueryTextSubmit(query: String): Boolean {
-//                    return false
-//                }
-//                override fun onQueryTextChange(newText: String): Boolean {
-//                    return false
-//                }
-//            })
-//        }
+        searchLocation(menu)
         return true
     }
 
@@ -100,4 +89,30 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
     }
 
     override fun getViewBinding() = ActivityWeatherBinding.inflate(layoutInflater)
+
+    private fun searchLocation(menu: Menu?) {
+        val searchManager = getSystemService(SEARCH_SERVICE) as SearchManager
+        val item = menu?.findItem(R.id.action_search)
+        item?.let {
+            val searchView = it.actionView as SearchView
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    if (query.isNotEmpty()) {
+                        startActivity(ForecastActivity.newIntent(this@WeatherActivity, query))
+                    }
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String): Boolean {
+                    if (searchView.query.isEmpty()) {
+                        return true
+                    }
+                    return false
+                }
+            })
+        }
+    }
+
 }
