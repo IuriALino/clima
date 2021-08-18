@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#A39A4F</color>
     <color name="semi_white">#88FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
 </resources>
