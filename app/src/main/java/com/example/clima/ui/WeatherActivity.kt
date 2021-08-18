@@ -110,5 +110,4 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
             })
         }
     }
-
 }
