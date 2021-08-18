@@ -64,10 +64,6 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
                 updateWeather()
                 true
             }
-//            R.id.action_search -> {
-//                // Verify the action and get the query
-//                true
-//            }
             else -> super.onOptionsItemSelected(item)
         }
     }
