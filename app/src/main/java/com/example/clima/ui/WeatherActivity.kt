@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clima.R
 import com.example.clima.data.model.CityEnum
 import com.example.clima.data.model.Model
+import com.example.clima.data.source.snackBarIndefinite
 import com.example.clima.databinding.ActivityWeatherBinding
 import com.example.clima.ui.adapter.HomeAdapter
 import com.example.clima.ui.common.BaseActivity
@@ -84,6 +85,12 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
         weatherViewModel.isLoading.observe(this) {
             progressLoader.setVisibility(it)
         }
+        weatherViewModel.errorMessage.observe(this, { error ->
+            val msg = error ?: getString(R.string.error_invalid_response)
+            binding.recyclerView.snackBarIndefinite(message = msg) { snackbar ->
+                snackbar.dismiss()
+            }
+        })
     }
 
     override fun getViewBinding() = ActivityWeatherBinding.inflate(layoutInflater)

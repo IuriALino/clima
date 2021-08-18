@@ -1,4 +1,7 @@
 package com.example.clima.data.source
+import android.view.View
+import androidx.annotation.StringRes
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.coroutines.Dispatchers
@@ -108,4 +111,25 @@ fun Double.kelvinToCelsius() : String {
     val dec = DecimalFormat("###.##")
     val celsius = this - 273.15
     return "${dec.format(celsius)} ºC"
+}
+
+fun View.snackBarIndefinite(
+    @StringRes messageRes: Int? = null,
+    message: String? = null,
+    doAction: (Snackbar) -> Unit = {}
+) {
+    try {
+        val snackBar = messageRes?.let {
+            Snackbar.make(this, messageRes, Snackbar.LENGTH_INDEFINITE)
+        } ?: run {
+            Snackbar.make(this, message ?: "", Snackbar.LENGTH_INDEFINITE)
+        }
+
+        snackBar.setAction("Fechar") {
+            doAction(snackBar)
+        }
+        snackBar.show()
+    } catch (ex: Exception) {
+        ex.printStackTrace()
+    }
 }

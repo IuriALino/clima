@@ -2,9 +2,9 @@ package com.example.clima.ui
 
 import androidx.lifecycle.*
 import com.example.clima.data.model.CityEnum
+import com.example.clima.data.model.ForeCastModel
 import com.example.clima.data.model.WeatherModel
 import com.example.clima.data.repo.WeatherRepository
-import com.example.clima.data.source.retrofit.response.ForeCastResponse
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -20,8 +20,8 @@ class WeatherViewModel(
     private val _openWeatherModel = MutableLiveData<WeatherModel?>()
     val openWeatherModel: LiveData<WeatherModel?> = _openWeatherModel
 
-    private val _openForeCastResponse = MutableLiveData<ForeCastResponse?>()
-    val openForeCastResponse: LiveData<ForeCastResponse?> = _openForeCastResponse
+    private val _openForeCastModel = MutableLiveData<List<ForeCastModel>?>()
+    val openForeCastModel: LiveData<List<ForeCastModel>?> = _openForeCastModel
 
     private val _error = MutableLiveData<JsonObject>()
     val error: LiveData<JsonObject> = _error
@@ -43,7 +43,7 @@ class WeatherViewModel(
     fun requestForecast(location : String) {
         viewModelScope.launch(IO) {
             val response = weatherRepository.fetchForeCast(location)
-            response.first?.let { _openForeCastResponse.postValue(it) }
+            response.first?.let { _openForeCastModel.postValue(it) }
             response.second?.let { _error.postValue(it) }
         }
     }

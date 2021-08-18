@@ -3,6 +3,7 @@ package com.example.clima.data.repo
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import com.example.clima.data.model.ForeCastModel
 import com.example.clima.data.model.WeatherModel
 import com.example.clima.data.source.HttpResult
 import com.example.clima.data.source.defaultError
@@ -64,7 +65,10 @@ class WeatherRepository(
             is HttpResult.Success -> {
                 if (response.data.isSuccessful) {
                     _isLoading.postValue(false)
-                    return@withContext Pair(response.data.body(), error)
+                    response.data.body()?.let {
+                        return@withContext Pair(ForeCastModel.fromResponse(it), error)
+                    }
+                    return@withContext Pair(null, error)
                 } else {
                     response.data.defaultFailure {
                         error = it

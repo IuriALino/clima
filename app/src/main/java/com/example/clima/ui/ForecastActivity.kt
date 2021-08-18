@@ -3,11 +3,12 @@ package com.example.clima.ui
 import android.content.Context
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.clima.R
+import com.example.clima.data.source.snackBarIndefinite
 import com.example.clima.databinding.ActivityForecastBinding
 import com.example.clima.ui.adapter.ForeCastAdapter
 import com.example.clima.ui.common.BaseActivity
 import com.example.clima.view.ProgressLoader
-import kotlinx.coroutines.withContext
 
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -44,10 +45,10 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
     }
 
     override fun subscribeUI() {
-        weatherViewModel.openForeCastResponse.observe(this){
+        weatherViewModel.openForeCastModel.observe(this){
             it?.let { forecast ->
                 with(_adapter) {
-                    this.forecast = forecast.list
+                    this.forecast = forecast
                     notifyDataSetChanged()
                 }
             }
@@ -55,6 +56,12 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
         weatherViewModel.isLoading.observe(this) {
             progressLoader.setVisibility(it)
         }
+        weatherViewModel.errorMessage.observe(this, { error ->
+            val msg = error ?: getString(R.string.error_invalid_response)
+            binding.recyclerViewForecast.snackBarIndefinite(message = msg) { snackbar ->
+                snackbar.dismiss()
+            }
+        })
     }
     override fun getViewBinding() = ActivityForecastBinding.inflate(layoutInflater)
 }
