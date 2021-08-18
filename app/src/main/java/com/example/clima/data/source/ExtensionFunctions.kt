@@ -58,12 +58,7 @@ fun Throwable.getFormatedMessage(): String {
 }
 
 const val DATE_FORMAT_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss"
-const val DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS = "yyyy-MM-dd'T'HH:mm:ss"
 const val DATE_FORMAT_DD_MM_YYYY = "dd/MM/yyyy"
-const val DATE_FORMAT_YYYY_MM_DD = "yyyy-MM-dd"
-const val DATE_FORMAT_DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy HH:mm:ss"
-const val DATE_FORMAT_DD_MM_YYYY_HH_MM = "dd/MM/yyyy HH:mm"
-const val DATE_FORMAT_HH_MM = "HH:mm:ss"
 
 fun String.parseToDate(
     pattern: String = DATE_FORMAT_YYYY_MM_DD_HH_MM_SS,

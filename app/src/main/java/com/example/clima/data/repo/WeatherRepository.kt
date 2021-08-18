@@ -21,10 +21,6 @@ class WeatherRepository(
     private val _isLoading = MutableLiveData<Boolean>()
     val isloading = liveData(IO) { emitSource(_isLoading) }
 
-    fun setLoading(loading: Boolean) {
-        _isLoading.postValue(loading)
-    }
-
     suspend fun fetchWeather(
         location: String
     ) = withContext(IO) {

@@ -6,13 +6,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clima.databinding.ActivityForecastBinding
 import com.example.clima.ui.adapter.ForeCastAdapter
 import com.example.clima.ui.common.BaseActivity
+import com.example.clima.view.ProgressLoader
+import kotlinx.coroutines.withContext
+
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension
+import org.koin.core.parameter.parametersOf
 
 @KoinApiExtension
 class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
     private val _adapter by lazy { ForeCastAdapter() }
     private val weatherViewModel by viewModel<WeatherViewModel>()
+    private val progressLoader by inject<ProgressLoader> { parametersOf(this) }
 
     companion object {
         private const val ARG_MESSAGE_RES = "message_res"
@@ -45,6 +51,9 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
                     notifyDataSetChanged()
                 }
             }
+        }
+        weatherViewModel.isLoading.observe(this) {
+            progressLoader.setVisibility(it)
         }
     }
     override fun getViewBinding() = ActivityForecastBinding.inflate(layoutInflater)
