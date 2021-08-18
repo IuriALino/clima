@@ -1,4 +1,4 @@
-package com.example.clima.data
+package com.example.clima.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

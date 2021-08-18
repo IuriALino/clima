@@ -1,15 +1,14 @@
 package com.example.clima.ui
 
 import android.app.SearchManager
-import android.content.Context
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clima.R
-import com.example.clima.data.CityEnum
-import com.example.clima.data.Model
+import com.example.clima.data.model.CityEnum
+import com.example.clima.data.model.Model
 import com.example.clima.databinding.ActivityWeatherBinding
 import com.example.clima.ui.adapter.HomeAdapter
 import com.example.clima.ui.common.BaseActivity
@@ -25,7 +24,10 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
     private val weatherViewModel by viewModel<WeatherViewModel>()
     private val progressLoader by inject<ProgressLoader> { parametersOf(this) }
 
-    val cities = listOf(Model(CityEnum.MELBOURNE), Model(CityEnum.MONTE_CARLO), Model(CityEnum.SAO_PAULO), Model(CityEnum.SILVERSTONE))
+    val cities = listOf(
+        Model(CityEnum.MELBOURNE), Model(CityEnum.MONTE_CARLO), Model(CityEnum.SAO_PAULO), Model(
+            CityEnum.SILVERSTONE)
+    )
 
     override fun initUIComponents() {
         binding.recyclerView.apply {
@@ -69,11 +71,11 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
     }
 
     override fun subscribeUI() {
-        weatherViewModel.openWeatherResponse.observe(this){
+        weatherViewModel.openWeatherModel.observe(this){
             it?.let { weather ->
                 cities.forEach { model ->
-                    if(weather.name .equals(model.cityEnum.description, true)  ){
-                        model.temperature = weather.main.temp
+                    if(weather.city.equals(model.cityEnum.description, true)){
+                        model.temperature = weather.temperature
                     }
                 }
                 _adapter.notifyDataSetChanged()

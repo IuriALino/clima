@@ -3,8 +3,7 @@ package com.example.clima.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clima.data.Model
-import com.example.clima.data.source.kelvinToCelsius
+import com.example.clima.data.model.Model
 import com.example.clima.databinding.RowItemBinding
 
 class HomeAdapter(
@@ -26,7 +25,7 @@ class HomeAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Model) = with(binding) {
             textViewCity.text = item.cityEnum.description
-            textViewTemperature.text = item.temperature.kelvinToCelsius()
+            textViewTemperature.text = item.temperature
             cvHome.setOnClickListener {
                 onItemSelected(item)
             }
