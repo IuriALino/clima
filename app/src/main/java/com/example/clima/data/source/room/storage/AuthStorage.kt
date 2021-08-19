@@ -29,6 +29,4 @@ class AuthStorage(private val authDAO: AuthDAO) {
     suspend fun deleteCity(city : String) = withContext(IO) {
         city.removeSpecialCharacters()?.let { authDAO.deleteCity(it.uppercase()) }
     }
-
-
 }
