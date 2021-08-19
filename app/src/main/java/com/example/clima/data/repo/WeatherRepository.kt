@@ -9,6 +9,9 @@ import com.example.clima.data.source.HttpResult
 import com.example.clima.data.source.defaultError
 import com.example.clima.data.source.defaultFailure
 import com.example.clima.data.source.retrofit.client.WeatherAPIClient
+import com.example.clima.data.source.retrofit.response.ForeCastResponse
+import com.example.clima.data.source.room.entity.AuthEntity
+import com.example.clima.data.source.room.storage.AuthStorage
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
@@ -18,6 +21,7 @@ import org.koin.core.component.KoinApiExtension
 class WeatherRepository(
     private val weatherAPIClient: WeatherAPIClient,
     private val context: Context,
+    private val authStorage: AuthStorage
     //private val appPreferences: AppPreferences
 ) {
     private val _isLoading = MutableLiveData<Boolean>()
@@ -66,6 +70,8 @@ class WeatherRepository(
                 if (response.data.isSuccessful) {
                     _isLoading.postValue(false)
                     response.data.body()?.let {
+                        deleteCity(it)
+                        saveCity(it)
                         return@withContext Pair(ForeCastModel.fromResponse(it), error)
                     }
                     return@withContext Pair(null, error)
@@ -86,4 +92,24 @@ class WeatherRepository(
             }
         }
     }
+
+    private suspend fun saveCity(it: ForeCastResponse) {
+        ForeCastModel.fromResponse(it).forEach { forecast ->
+            authStorage.saveDataForeCast(forecast)
+        }
+    }
+
+    private suspend fun deleteCity(it: ForeCastResponse) {
+        ForeCastModel.fromResponse(it).forEach { forecast ->
+            authStorage.deleteCity(forecast.city)
+        }
+    }
+
+    suspend fun getForecast(location: String) = withContext(IO) {
+        _isLoading.postValue(true)
+        val authEntity = authStorage.getForecast(location)
+        _isLoading.postValue(false)
+        return@withContext authEntity
+    }
+
 }

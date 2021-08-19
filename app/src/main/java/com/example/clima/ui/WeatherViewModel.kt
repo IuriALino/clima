@@ -5,6 +5,7 @@ import com.example.clima.data.model.CityEnum
 import com.example.clima.data.model.ForeCastModel
 import com.example.clima.data.model.WeatherModel
 import com.example.clima.data.repo.WeatherRepository
+import com.example.clima.data.source.room.entity.AuthEntity
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -22,6 +23,8 @@ class WeatherViewModel(
 
     private val _openForeCastModel = MutableLiveData<List<ForeCastModel>?>()
     val openForeCastModel: LiveData<List<ForeCastModel>?> = _openForeCastModel
+
+
 
     private val _error = MutableLiveData<JsonObject>()
     val error: LiveData<JsonObject> = _error
@@ -45,6 +48,17 @@ class WeatherViewModel(
             val response = weatherRepository.fetchForeCast(location)
             response.first?.let { _openForeCastModel.postValue(it) }
             response.second?.let { _error.postValue(it) }
+        }
+    }
+
+    private val _dataBaseForeCast = MutableLiveData<List<ForeCastModel>>()
+    val dataBaseForeCast: LiveData<List<ForeCastModel>> = _dataBaseForeCast
+
+    fun getForecast(location: String) {
+        viewModelScope.launch(IO) {
+            weatherRepository.getForecast(location).let {
+                _dataBaseForeCast.postValue(it)
+            }
         }
     }
 }

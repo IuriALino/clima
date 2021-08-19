@@ -10,8 +10,10 @@ import retrofit2.Response
 import java.net.ConnectException
 import java.net.UnknownHostException
 import java.text.DecimalFormat
+import java.text.Normalizer
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 suspend fun <T> Response<T>?.defaultFailure(failure: (t: JsonObject) -> Unit) = withContext(
     Dispatchers.IO
@@ -131,5 +133,18 @@ fun View.snackBarIndefinite(
         snackBar.show()
     } catch (ex: Exception) {
         ex.printStackTrace()
+    }
+}
+
+fun String?.removeSpecialCharacters(): String? {
+    var str2 = this
+    if (str2.isNullOrEmpty()) return ""
+
+    Pattern.compile("\\p{InCombiningDiacriticalMarks}+").apply {
+        str2 = Normalizer.normalize(str2, Normalizer.Form.NFD)
+        str2?.let {
+            str2 = matcher(it).replaceAll("")
+        }
+        return str2
     }
 }

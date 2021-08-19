@@ -45,7 +45,15 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
     }
 
     override fun subscribeUI() {
-        weatherViewModel.openForeCastModel.observe(this){
+        weatherViewModel.openForeCastModel.observe(this) {
+            it?.let { forecast ->
+                with(_adapter) {
+                    this.forecast = forecast
+                    notifyDataSetChanged()
+                }
+            }
+        }
+        weatherViewModel.dataBaseForeCast.observe(this) {
             it?.let { forecast ->
                 with(_adapter) {
                     this.forecast = forecast
@@ -57,11 +65,15 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
             progressLoader.setVisibility(it)
         }
         weatherViewModel.errorMessage.observe(this, { error ->
+            intent.getStringExtra(ARG_MESSAGE_RES)?.let {
+                weatherViewModel.getForecast(it)
+            }
             val msg = error ?: getString(R.string.error_invalid_response)
             binding.recyclerViewForecast.snackBarIndefinite(message = msg) { snackbar ->
                 snackbar.dismiss()
             }
         })
     }
+
     override fun getViewBinding() = ActivityForecastBinding.inflate(layoutInflater)
 }
