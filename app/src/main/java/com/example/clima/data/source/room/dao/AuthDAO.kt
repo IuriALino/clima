@@ -8,7 +8,6 @@ import com.example.clima.data.model.ForeCastModel
 import com.example.clima.data.source.room.entity.AuthEntity
 import org.koin.core.component.KoinApiExtension
 
-
 @Dao
 interface AuthDAO {
     @KoinApiExtension
@@ -20,5 +19,4 @@ interface AuthDAO {
 
     @Query("DELETE FROM ${AuthEntity.TABLE_NAME} WHERE ${AuthEntity.COLUMN_CITY} = :city")
     suspend fun deleteCity(city: String)
-
 }

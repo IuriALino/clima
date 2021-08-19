@@ -1,7 +1,6 @@
 package com.example.clima.data.source.retrofit.response
 import com.google.gson.annotations.SerializedName
 
-
 data class WeatherResponse(
     @SerializedName("base")
     val base: String,

@@ -9,7 +9,6 @@ import com.example.clima.databinding.ActivityForecastBinding
 import com.example.clima.ui.adapter.ForeCastAdapter
 import com.example.clima.ui.common.BaseActivity
 import com.example.clima.view.ProgressLoader
-
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinApiExtension

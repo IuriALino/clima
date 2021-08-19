@@ -1,11 +1,9 @@
 package com.example.clima.ui
 
 import androidx.lifecycle.*
-import com.example.clima.data.model.CityEnum
 import com.example.clima.data.model.ForeCastModel
 import com.example.clima.data.model.WeatherModel
 import com.example.clima.data.repo.WeatherRepository
-import com.example.clima.data.source.room.entity.AuthEntity
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch

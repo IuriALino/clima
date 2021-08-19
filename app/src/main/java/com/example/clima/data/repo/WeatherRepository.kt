@@ -22,7 +22,6 @@ class WeatherRepository(
     private val weatherAPIClient: WeatherAPIClient,
     private val context: Context,
     private val authStorage: AuthStorage
-    //private val appPreferences: AppPreferences
 ) {
     private val _isLoading = MutableLiveData<Boolean>()
     val isloading = liveData(IO) { emitSource(_isLoading) }
@@ -111,5 +110,4 @@ class WeatherRepository(
         _isLoading.postValue(false)
         return@withContext authEntity
     }
-
 }
