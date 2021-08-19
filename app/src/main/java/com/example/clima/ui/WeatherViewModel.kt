@@ -35,9 +35,9 @@ class WeatherViewModel(
         }
     }
 
-    fun requestWeather(location : CityEnum) {
+    fun requestWeather(location : String) {
         viewModelScope.launch(IO) {
-        val response = weatherRepository.fetchWeather("${location.description}, ${location.country}")
+        val response = weatherRepository.fetchWeather(location)
                 response.first?.let { _openWeatherModel.postValue(it) }
                 response.second?.let { _error.postValue(it) }
         }

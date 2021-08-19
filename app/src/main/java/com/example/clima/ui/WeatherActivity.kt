@@ -39,7 +39,7 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
 
     private val _adapter by lazy {
         HomeAdapter(cities) {
-            startActivity(ForecastActivity.newIntent(this,"${it.cityEnum.description}, ${it.cityEnum.country}"))
+            startActivity(ForecastActivity.newIntent(this,it.cityEnum.description))
         }
     }
 
@@ -49,7 +49,7 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
 
     private fun updateWeather() {
         cities.forEach {
-            weatherViewModel.requestWeather(it.cityEnum)
+            weatherViewModel.requestWeather(it.cityEnum.description)
         }
     }
 
