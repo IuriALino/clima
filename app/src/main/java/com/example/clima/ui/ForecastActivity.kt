@@ -53,7 +53,7 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
                 }
             }
         }
-        weatherViewModel.dataBaseForeCast.observe(this) {
+        weatherViewModel.openForeCastModel.observe(this) {
             it?.let { forecast ->
                 with(_adapter) {
                     this.forecast = forecast

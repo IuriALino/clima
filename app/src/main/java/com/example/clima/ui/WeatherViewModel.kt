@@ -24,8 +24,6 @@ class WeatherViewModel(
     private val _openForeCastModel = MutableLiveData<List<ForeCastModel>?>()
     val openForeCastModel: LiveData<List<ForeCastModel>?> = _openForeCastModel
 
-
-
     private val _error = MutableLiveData<JsonObject>()
     val error: LiveData<JsonObject> = _error
 
@@ -51,13 +49,10 @@ class WeatherViewModel(
         }
     }
 
-    private val _dataBaseForeCast = MutableLiveData<List<ForeCastModel>>()
-    val dataBaseForeCast: LiveData<List<ForeCastModel>> = _dataBaseForeCast
-
     fun getForecast(location: String) {
         viewModelScope.launch(IO) {
             weatherRepository.getForecast(location).let {
-                _dataBaseForeCast.postValue(it)
+                _openForeCastModel.postValue(it)
             }
         }
     }
