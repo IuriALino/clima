@@ -23,7 +23,7 @@ object RetrofitClient : KoinComponent {
     private fun httpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
 
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
 
         return OkHttpClient.Builder().apply {
             connectTimeout(10, TimeUnit.SECONDS)
