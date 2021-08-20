@@ -24,7 +24,7 @@ class AuthStorage(private val authDAO: AuthDAO) {
     }
 
     suspend fun getForecast(city : String) = withContext(IO) {
-        city.removeSpecialCharacters()?.let { authDAO.getForecast(it.uppercase().replace(",","",false)) }
+        city.removeSpecialCharacters()?.let { authDAO.getForecast(it.uppercase()) }
     }
 
     suspend fun deleteCity(city : String) = withContext(IO) {
