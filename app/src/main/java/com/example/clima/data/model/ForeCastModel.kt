@@ -19,8 +19,12 @@ data class ForeCastModel(
                     ?.formatToPattern(DATE_FORMAT_DD_MM_YYYY)
 
             }
-            map.keys.forEach {
-                val foreCast = map[it]?.get(0)
+            map.keys.forEachIndexed {
+                index, key ->
+                if (index == 5) {
+                    return@forEachIndexed
+                }
+                val foreCast = map[key]?.get(0)
                 list.add(
                     ForeCastModel(
                         foreCast?.dtTxt?.parseToDate(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS)
