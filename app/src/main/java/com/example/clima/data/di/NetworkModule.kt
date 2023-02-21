@@ -22,16 +22,26 @@ val networkModule = module {
             .writeTimeout(30, TimeUnit.SECONDS)
             .addNetworkInterceptor(get<HttpLoggingInterceptor>())
     }
+
+    single {
+        HttpLoggingInterceptor().apply {
+            level = when (BuildConfig.BUILD_TYPE == "debug") {
+                true -> HttpLoggingInterceptor.Level.BODY
+                else -> HttpLoggingInterceptor.Level.NONE
+            }
+        }
+    }
+    single { createWebService<WeatherAPI>(okHttpClientBuilder = get()) }
+
     factory {
         InterceptorAPI()
     }
-    single { createWebService<WeatherAPI>(okHttpClientBuilder = get()) }
-    single {
-        createWebService<WeatherAPI>(
-            okHttpClientBuilder = get(),
-            interceptors = arrayOf(get<InterceptorAPI>())
-        )
-    }
+//    single {
+//        createWebService<WeatherAPI>(
+//            okHttpClientBuilder = get(),
+//            interceptors = arrayOf(get<InterceptorAPI>())
+//        )
+//    }
 }
 
 

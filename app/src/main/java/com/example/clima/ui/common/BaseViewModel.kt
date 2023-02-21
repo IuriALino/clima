@@ -10,8 +10,10 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.koin.core.component.KoinApiExtension
 import org.koin.core.component.KoinComponent
 
+@KoinApiExtension
 abstract class BaseViewModel : ViewModel(), KoinComponent {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading

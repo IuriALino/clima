@@ -11,7 +11,9 @@ import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinApiExtension
 
 @KoinApiExtension
-class AuthStorage(private val authDAO: AuthDAO) {
+class AuthStorage(
+    private val authDAO: AuthDAO
+    ) {
 
     suspend fun saveDataForeCast(foreCastModel: ForeCastModel) = withContext(IO + NonCancellable) {
         authDAO.insert(

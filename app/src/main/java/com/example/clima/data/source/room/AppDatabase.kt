@@ -1,6 +1,7 @@
 package com.example.clima.data.source.room
 
 import androidx.room.*
+import androidx.room.Database
 import com.example.clima.data.source.room.dao.AuthDAO
 import com.example.clima.data.source.room.entity.WeatherEntity
 import org.koin.core.component.KoinApiExtension
@@ -11,7 +12,7 @@ import org.koin.core.component.KoinApiExtension
         WeatherEntity::class
     ],
     version = 1,
-    exportSchema = true
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun authDAO(): AuthDAO

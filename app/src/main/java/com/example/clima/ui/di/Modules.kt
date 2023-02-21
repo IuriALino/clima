@@ -14,17 +14,24 @@ import org.koin.dsl.module
 @KoinApiExtension
 object Modules {
 
-    val app = module {
-        viewModel { WeatherViewModel(get()) }
+    private val ui = module {
         factory { (context: Context) -> ProgressLoader(context) }
     }
 
+    private val viewModel = module {
+        viewModel {
+            WeatherViewModel(
+                weatherUseCase = get()
+            )
+        }
+    }
+
     val modules = listOf(
-        app,
+        ui,
         databasemodule,
         repositoryModule,
         networkModule,
-        useCaseModule
-
+        useCaseModule,
+        viewModel
     )
 }

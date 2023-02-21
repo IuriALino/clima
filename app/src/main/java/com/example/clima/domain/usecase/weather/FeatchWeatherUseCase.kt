@@ -9,5 +9,4 @@ class FeatchWeatherUseCase(
     private val weatherRepository: WeatherRepository
 ):UseCase<String, Flow<WeatherDomain?>> {
     override suspend fun execute(param: String) = weatherRepository.featchWeather(param)
-
 }

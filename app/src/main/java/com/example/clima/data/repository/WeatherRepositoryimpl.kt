@@ -78,9 +78,9 @@ class WeatherRepositoryimpl(
         return@withContext authEntity
     }
 
-    override suspend fun featchWeather(params: String): Flow<WeatherDomain?>  = flow {
-        RequestManager.requestFromApi { weatherAPI.featchWeather(params) }?.run {
-           emit(WeatherRemoteMapper.toDomain(this))
+    override suspend fun featchWeather(params: String): Flow<WeatherDomain?> = flow {
+        RequestManager.requestFromApi { weatherAPI.featchWeather(params) }.run {
+           emit(this?.let { WeatherRemoteMapper.toDomain(it) })
         }
     }
 }

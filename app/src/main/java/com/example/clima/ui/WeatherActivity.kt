@@ -44,8 +44,13 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
         }
     }
 
-    override fun initUIEvents() {
+    override fun onStart() {
+        super.onStart()
         updateWeather()
+    }
+
+    override fun initUIEvents() {
+
     }
 
     private fun updateWeather() {
@@ -78,7 +83,7 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
             it?.let { weather ->
                 cities.forEach { model ->
                     if(weather.name.equals(model.cityEnum.description, true)){
-                        model.temperature = weather.main.temp
+                        model.temperature = weather.main?.temp.toString()
                     }
                 }
                 _adapter.notifyDataSetChanged()
