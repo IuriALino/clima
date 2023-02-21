@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
+    protected abstract fun getViewBinding(): VB
     protected abstract fun initUIComponents()
     protected abstract fun initUIEvents()
     protected abstract fun subscribeUI()
@@ -20,5 +21,5 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         subscribeUI()
     }
 
-    protected abstract fun getViewBinding(): VB
+
 }
