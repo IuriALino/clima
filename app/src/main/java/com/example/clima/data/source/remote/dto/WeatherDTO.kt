@@ -1,4 +1,6 @@
 package com.example.clima.data.source.remote.dto
+import com.example.clima.data.source.kelvinToCelsius
+import com.example.clima.domain.model.*
 import com.google.gson.annotations.SerializedName
 
 data class WeatherDTO(
@@ -88,4 +90,42 @@ data class WindDTO(
     val deg: Int,
     @SerializedName("speed")
     val speed: Double
+)
+
+fun CloudsDTO.toDomain() = CloudsDomain(
+    all = all
+)
+
+fun CoordDTO.toDomain() = CoordDomain(
+    lat = lat,
+    lon = lon
+)
+
+fun MainDTO.toDomain() = MainDomain(
+    feelsLike = feelsLike,
+    humidity = humidity,
+    pressure = pressure,
+    temp = temp.kelvinToCelsius(),
+    tempMax = tempMax,
+    tempMin = tempMin
+)
+
+fun SysDTO.toDomain() = SysDomain(
+    country = country,
+    id = id,
+    sunrise = sunrise,
+    sunset = sunset,
+    type = type
+)
+
+fun WeatherListDTO.toDomain() = WeatherListDomain(
+    description = description,
+    icon = icon,
+    id = id,
+    main = main
+)
+
+fun WindDTO.toDomain() = WindDomain(
+    deg = deg,
+    speed = speed
 )

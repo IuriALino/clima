@@ -1,4 +1,4 @@
-package com.example.clima.data.source.retrofit
+package com.example.clima.data.source.remote
 
 object Route {
     object Weather {

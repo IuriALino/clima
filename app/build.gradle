@@ -24,7 +24,7 @@ android {
             debuggable false
             minifyEnabled true
             shrinkResources false
-            //buildConfigField 'String', 'API_HOST', '"https://api.openweathermap.org"'
+            buildConfigField 'String', 'BASE_URL', '"https://api.openweathermap.org"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
         }
@@ -33,6 +33,7 @@ android {
             minifyEnabled false
             shrinkResources false
             testCoverageEnabled = true
+            buildConfigField 'String', 'BASE_URL', '"https://api.openweathermap.org"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

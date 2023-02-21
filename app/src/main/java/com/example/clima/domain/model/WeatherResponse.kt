@@ -1,6 +1,6 @@
 package com.example.clima.domain.model
 
-data class WeatherResponseDomain(
+data class WeatherDomain(
     val base: String,
     val clouds: CloudsDomain,
     val cod: Int,
@@ -12,7 +12,7 @@ data class WeatherResponseDomain(
     val sys: SysDomain,
     val timezone: Int,
     val visibility: Int,
-    val weather: List<WeatherDomain>,
+    val weather: List<WeatherListDomain>,
     val wind: WindDomain,
     val dtTxt: String,
 )
@@ -30,7 +30,7 @@ data class MainDomain(
     val feelsLike: Double,
     val humidity: Int,
     val pressure: Int,
-    val temp: Double,
+    var temp: String,
     val tempMax: Double,
     val tempMin: Double
 )
@@ -43,7 +43,7 @@ data class SysDomain(
     val type: Int
 )
 
-data class WeatherDomain(
+data class WeatherListDomain(
     val description: String,
     val icon: String,
     val id: Int,

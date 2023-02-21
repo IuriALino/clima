@@ -1,5 +1,6 @@
 package com.example.clima.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,10 +40,11 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
 
     override fun initUIEvents() {
         intent.getStringExtra(ARG_MESSAGE_RES)?.let {
-            weatherViewModel.requestForecast(it)
+//            weatherViewModel.requestForecast(it)
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun subscribeUI() {
         weatherViewModel.openForeCastModel.observe(this) {
             it?.let { forecast ->
@@ -63,15 +65,15 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
         weatherViewModel.isLoading.observe(this) {
             progressLoader.setVisibility(it)
         }
-        weatherViewModel.errorMessage.observe(this, { error ->
+        weatherViewModel.errorMessage.observe(this) { error ->
             intent.getStringExtra(ARG_MESSAGE_RES)?.let {
-                weatherViewModel.getForecast(it)
+//                weatherViewModel.getForecast(it)
             }
             val msg = error ?: getString(R.string.error_invalid_response)
             binding.recyclerViewForecast.snackBarIndefinite(message = msg) { snackbar ->
                 snackbar.dismiss()
             }
-        })
+        }
     }
 
     override fun getViewBinding() = ActivityForecastBinding.inflate(layoutInflater)

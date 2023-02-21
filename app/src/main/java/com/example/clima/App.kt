@@ -1,7 +1,7 @@
 package com.example.clima
 
 import android.app.Application
-import com.example.clima.di.Modules
+import com.example.clima.ui.di.Modules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinApiExtension
@@ -15,7 +15,7 @@ class App: Application() {
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@App)
-            modules(Modules.app)
+            modules(Modules.modules)
         }
     }
 }

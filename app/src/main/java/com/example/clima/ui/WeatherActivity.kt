@@ -1,5 +1,6 @@
 package com.example.clima.ui
 
+import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.view.Menu
 import android.view.MenuInflater
@@ -71,12 +72,13 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun subscribeUI() {
         weatherViewModel.openWeatherModel.observe(this){
             it?.let { weather ->
                 cities.forEach { model ->
-                    if(weather.city.equals(model.cityEnum.description, true)){
-                        model.temperature = weather.temperature
+                    if(weather.name.equals(model.cityEnum.description, true)){
+                        model.temperature = weather.main.temp
                     }
                 }
                 _adapter.notifyDataSetChanged()
@@ -85,12 +87,12 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
         weatherViewModel.isLoading.observe(this) {
             progressLoader.setVisibility(it)
         }
-        weatherViewModel.errorMessage.observe(this, { error ->
+        weatherViewModel.errorMessage.observe(this) { error ->
             val msg = error ?: getString(R.string.error_invalid_response)
             binding.recyclerView.snackBarIndefinite(message = msg) { snackbar ->
                 snackbar.dismiss()
             }
-        })
+        }
     }
 
     override fun getViewBinding() = ActivityWeatherBinding.inflate(layoutInflater)
