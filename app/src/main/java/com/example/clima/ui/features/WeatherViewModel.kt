@@ -1,4 +1,4 @@
-package com.example.clima.ui
+package com.example.clima.ui.features
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import androidx.lifecycle.switchMap
 import com.example.clima.data.model.ForeCastModel
 import com.example.clima.domain.model.WeatherDomain
 import com.example.clima.domain.usecase.weather.FeatchWeatherUseCase
-import com.example.clima.ui.common.BaseViewModel
+import com.example.clima.ui.features.common.BaseViewModel
 import com.google.gson.JsonObject
 import kotlinx.coroutines.flow.collect
 import org.koin.core.component.KoinApiExtension

@@ -5,7 +5,7 @@ import com.example.clima.data.di.databasemodule
 import com.example.clima.data.di.networkModule
 import com.example.clima.data.di.repositoryModule
 import com.example.clima.domain.di.useCaseModule
-import com.example.clima.ui.WeatherViewModel
+import com.example.clima.ui.features.WeatherViewModel
 import com.example.clima.view.ProgressLoader
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.component.KoinApiExtension

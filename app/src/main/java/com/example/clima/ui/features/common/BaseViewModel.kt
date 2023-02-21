@@ -1,4 +1,4 @@
-package com.example.clima.ui.common
+package com.example.clima.ui.features.common
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData

@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Clima">
-        <activity android:name=".ui.ForecastActivity"></activity>
-        <activity android:name=".ui.WeatherActivity">
+        <activity android:name=".ui.features.weather.ForecastActivity"></activity>
+        <activity android:name=".ui.features.weather.WeatherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,4 +1,4 @@
-package com.example.clima.ui.adapter
+package com.example.clima.ui.features.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

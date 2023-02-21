@@ -1,4 +1,4 @@
-package com.example.clima.ui
+package com.example.clima.ui.features.weather
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
@@ -12,8 +12,9 @@ import com.example.clima.data.model.CityEnum
 import com.example.clima.data.model.Model
 import com.example.clima.data.source.snackBarIndefinite
 import com.example.clima.databinding.ActivityWeatherBinding
-import com.example.clima.ui.adapter.HomeAdapter
-import com.example.clima.ui.common.BaseActivity
+import com.example.clima.ui.features.WeatherViewModel
+import com.example.clima.ui.features.adapter.HomeAdapter
+import com.example.clima.ui.features.common.BaseActivity
 import com.example.clima.view.ProgressLoader
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -40,7 +41,7 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
 
     private val _adapter by lazy {
         HomeAdapter(cities) {
-            startActivity(ForecastActivity.newIntent(this,it.cityEnum.description))
+            startActivity(ForecastActivity.newIntent(this, it.cityEnum.description))
         }
     }
 
