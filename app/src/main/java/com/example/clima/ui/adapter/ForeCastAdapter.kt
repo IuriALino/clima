@@ -4,11 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clima.data.model.ForeCastModel
-import com.example.clima.data.source.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS
-import com.example.clima.data.source.formatToPattern
-import com.example.clima.data.source.kelvinToCelsius
-import com.example.clima.data.source.parseToDate
-import com.example.clima.data.source.retrofit.response.WeatherResponse
 import com.example.clima.databinding.RowItemForecastBinding
 
 class ForeCastAdapter : RecyclerView.Adapter<ForeCastAdapter.ViewHolder>()

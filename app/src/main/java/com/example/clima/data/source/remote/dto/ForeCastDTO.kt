@@ -1,23 +1,22 @@
-package com.example.clima.data.source.retrofit.response
+package com.example.clima.data.source.remote.dto
 import com.google.gson.annotations.SerializedName
 
-
-data class ForeCastResponse(
+data class ForeCastDTO(
     @SerializedName("city")
-    val city: City,
+    val city: CityDTO,
     @SerializedName("cnt")
     val cnt: Int,
     @SerializedName("cod")
     val cod: String,
     @SerializedName("list")
-    val list: List<WeatherResponse>,
+    val list: List<WeatherDTO>,
     @SerializedName("message")
     val message: Int,
 )
 
-data class City(
+data class CityDTO(
     @SerializedName("coord")
-    val coord: Coord,
+    val coord: CoordDTO,
     @SerializedName("country")
     val country: String,
     @SerializedName("id")

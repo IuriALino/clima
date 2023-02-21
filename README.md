@@ -8,6 +8,3 @@ Silverstone, Reino Unido
 São Paulo, Brasil
 Melbourne, Austrália
 Monte Carlo, Mônaco
-
-
-

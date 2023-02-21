@@ -14,7 +14,7 @@ class WeatherAPIClient(
         location: String
     ) = withContext(IO) {
         return@withContext try {
-            HttpResult.Success(retrofit.weatherService().fetchWeather(location))
+            HttpResult.Success(retrofit.weatherService().featchWeather(location))
         } catch (e: Throwable) {
             HttpResult.Error(e)
         }
@@ -24,7 +24,7 @@ class WeatherAPIClient(
         location: String
     ) = withContext(IO) {
         return@withContext try {
-            HttpResult.Success(retrofit.weatherService().fetchForecast(location))
+            HttpResult.Success(retrofit.weatherService().featchForecast(location))
         } catch (e: Throwable) {
             HttpResult.Error(e)
         }

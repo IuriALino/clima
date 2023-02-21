@@ -1,4 +1,4 @@
-package com.example.clima.data.repo
+package com.example.clima.data.repository
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
@@ -9,28 +9,28 @@ import com.example.clima.data.source.HttpResult
 import com.example.clima.data.source.defaultError
 import com.example.clima.data.source.defaultFailure
 import com.example.clima.data.source.retrofit.client.WeatherAPIClient
-import com.example.clima.data.source.retrofit.response.ForeCastResponse
-import com.example.clima.data.source.room.entity.AuthEntity
+import com.example.clima.data.source.remote.dto.ForeCastDTO
 import com.example.clima.data.source.room.storage.AuthStorage
+import com.example.clima.domain.repository.WeatherRepository
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinApiExtension
 
 @KoinApiExtension
-class WeatherRepository(
+class WeatherRepositoryimpl(
     private val weatherAPIClient: WeatherAPIClient,
     private val context: Context,
     private val authStorage: AuthStorage
-) {
+):WeatherRepository {
     private val _isLoading = MutableLiveData<Boolean>()
     val isloading = liveData(IO) { emitSource(_isLoading) }
 
-    suspend fun fetchWeather(
-        location: String
+    override suspend fun featchWeather(
+        params: String
     ) = withContext(IO) {
         _isLoading.postValue(true)
-        val response = weatherAPIClient.weather(location)
+        val response = weatherAPIClient.weather(params)
         var error: JsonObject? = null
         when (response) {
             is HttpResult.Success -> {
@@ -92,13 +92,13 @@ class WeatherRepository(
         }
     }
 
-    private suspend fun saveCity(it: ForeCastResponse) {
+    private suspend fun saveCity(it: ForeCastDTO) {
         ForeCastModel.fromResponse(it).forEach { forecast ->
             authStorage.saveDataForeCast(forecast)
         }
     }
 
-    private suspend fun deleteCity(it: ForeCastResponse) {
+    private suspend fun deleteCity(it: ForeCastDTO) {
         ForeCastModel.fromResponse(it).forEach { forecast ->
             authStorage.deleteCity(forecast.city)
         }

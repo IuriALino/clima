@@ -3,7 +3,7 @@ package com.example.clima.ui
 import androidx.lifecycle.*
 import com.example.clima.data.model.ForeCastModel
 import com.example.clima.data.model.WeatherModel
-import com.example.clima.data.repo.WeatherRepository
+import com.example.clima.data.repository.WeatherRepositoryimpl
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -11,7 +11,7 @@ import org.koin.core.component.KoinApiExtension
 
 @KoinApiExtension
 class WeatherViewModel(
-    private val weatherRepository: WeatherRepository
+    private val weatherRepository: WeatherRepositoryimpl
 ) : ViewModel() {
 
     val isLoading = weatherRepository.isloading
@@ -33,7 +33,7 @@ class WeatherViewModel(
 
     fun requestWeather(location : String) {
         viewModelScope.launch(IO) {
-        val response = weatherRepository.fetchWeather(location)
+        val response = weatherRepository.featchWeather(location)
                 response.first?.let { _openWeatherModel.postValue(it) }
                 response.second?.let { _error.postValue(it) }
         }

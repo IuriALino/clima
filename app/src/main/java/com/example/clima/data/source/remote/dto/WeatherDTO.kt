@@ -1,50 +1,50 @@
-package com.example.clima.data.source.retrofit.response
+package com.example.clima.data.source.remote.dto
 import com.google.gson.annotations.SerializedName
 
-data class WeatherResponse(
+data class WeatherDTO(
     @SerializedName("base")
     val base: String,
     @SerializedName("clouds")
-    val clouds: Clouds,
+    val clouds: CloudsDTO,
     @SerializedName("cod")
     val cod: Int,
     @SerializedName("coord")
-    val coord: Coord,
+    val coord: CoordDTO,
     @SerializedName("dt")
     val dt: Int,
     @SerializedName("id")
     val id: Int,
     @SerializedName("main")
-    val main: Main,
+    val main: MainDTO,
     @SerializedName("name")
     val name: String,
     @SerializedName("sys")
-    val sys: Sys,
+    val sys: SysDTO,
     @SerializedName("timezone")
     val timezone: Int,
     @SerializedName("visibility")
     val visibility: Int,
     @SerializedName("weather")
-    val weather: List<Weather>,
+    val weather: List<WeatherListDTO>,
     @SerializedName("wind")
-    val wind: Wind,
+    val wind: WindDTO,
     @SerializedName("dt_txt")
     val dtTxt: String,
 )
 
-data class Clouds(
+data class CloudsDTO(
     @SerializedName("all")
     val all: Int
 )
 
-data class Coord(
+data class CoordDTO(
     @SerializedName("lat")
     val lat: Double,
     @SerializedName("lon")
     val lon: Double
 )
 
-data class Main(
+data class MainDTO(
     @SerializedName("feels_like")
     val feelsLike: Double,
     @SerializedName("humidity")
@@ -59,7 +59,7 @@ data class Main(
     val tempMin: Double
 )
 
-data class Sys(
+data class SysDTO(
     @SerializedName("country")
     val country: String,
     @SerializedName("id")
@@ -72,7 +72,7 @@ data class Sys(
     val type: Int
 )
 
-data class Weather(
+data class WeatherListDTO(
     @SerializedName("description")
     val description: String,
     @SerializedName("icon")
@@ -83,7 +83,7 @@ data class Weather(
     val main: String
 )
 
-data class Wind(
+data class WindDTO(
     @SerializedName("deg")
     val deg: Int,
     @SerializedName("speed")

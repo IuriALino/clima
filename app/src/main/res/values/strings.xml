@@ -4,4 +4,6 @@
     <string name="search">Pesquisar</string>
     <string name="prompt_city">Ex: Belo Horizonte</string>
     <string name="error_invalid_response">Ocorreu um erro no recebimento dos dados\nPor favor tente novamente.</string>
+    <string name="error_internal_server">Erro no servidor</string>
+    <string name="error_login_invalid">Credenciais inválida</string>
 </resources>

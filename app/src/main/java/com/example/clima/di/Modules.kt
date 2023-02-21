@@ -2,7 +2,7 @@ package com.example.clima.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.clima.data.repo.WeatherRepository
+import com.example.clima.data.repository.WeatherRepositoryimpl
 import com.example.clima.data.source.retrofit.RetrofitClient
 import com.example.clima.data.source.retrofit.client.WeatherAPIClient
 import com.example.clima.data.source.room.AppDatabase
@@ -18,7 +18,7 @@ object Modules {
 
     val app = module {
         factory { WeatherAPIClient(get()) }
-        factory { WeatherRepository(weatherAPIClient = get(), context= get(), authStorage = get())}
+        factory { WeatherRepositoryimpl(weatherAPIClient = get(), context= get(), authStorage = get())}
         viewModel { WeatherViewModel(get()) }
         single { RetrofitClient }
         factory { (context: Context) -> ProgressLoader(context) }

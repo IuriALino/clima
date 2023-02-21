@@ -1,7 +1,7 @@
 package com.example.clima.data.model
 
 import com.example.clima.data.source.*
-import com.example.clima.data.source.retrofit.response.ForeCastResponse
+import com.example.clima.data.source.remote.dto.ForeCastDTO
 
 data class ForeCastModel(
     var date: String,
@@ -9,7 +9,7 @@ data class ForeCastModel(
     var city: String
 ) {
     companion object {
-        fun fromResponse(foreCastResponse: ForeCastResponse): List<ForeCastModel> {
+        fun fromResponse(foreCastResponse: ForeCastDTO): List<ForeCastModel> {
             val list = mutableListOf<ForeCastModel>()
 
             val city = foreCastResponse.city.name
