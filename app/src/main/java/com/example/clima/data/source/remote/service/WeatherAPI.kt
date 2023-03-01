@@ -3,6 +3,7 @@ package com.example.clima.data.source.remote.service
 import com.example.clima.BuildConfig
 import com.example.clima.data.source.remote.dto.WeatherDTO
 import com.example.clima.data.source.remote.Route
+import com.example.clima.data.source.remote.dto.ForeCastDTO
 import org.koin.core.component.KoinApiExtension
 import retrofit2.Response
 import retrofit2.http.GET

@@ -43,9 +43,9 @@ class WeatherRepositoryimpl(
         }
     }
 
-    override suspend fun requestForecast(params: String): List<ForeCastDomain> {
+    override suspend fun requestForecast(params: String): Flow<List<ForeCastDomain>?> = flow {
         val forecastDTO = RequestManager.requestFromApi { weatherAPI.featchForecast(params) }
-        return ForeCastModel.ForeCastRemoteMapper(forecastDTO)
+        emit(forecastDTO?.let { ForeCastModel.ForeCastRemoteMapper(it) })
     }
 }
 

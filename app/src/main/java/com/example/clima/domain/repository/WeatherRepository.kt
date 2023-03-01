@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface WeatherRepository {
     suspend fun featchWeather(params: String): Flow<WeatherDomain?>
-    suspend fun requestForecast(params: String) : List<ForeCastDomain>
+    suspend fun requestForecast(params: String) : Flow<List<ForeCastDomain>?>
 }

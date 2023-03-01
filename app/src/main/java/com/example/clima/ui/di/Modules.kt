@@ -21,7 +21,8 @@ object Modules {
     private val viewModel = module {
         viewModel {
             WeatherViewModel(
-                weatherUseCase = get()
+                weatherUseCase = get(),
+                foreCastUseCase = get()
             )
         }
     }

@@ -41,7 +41,7 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
 
     override fun initUIEvents() {
         intent.getStringExtra(ARG_MESSAGE_RES)?.let {
-//            weatherViewModel.requestForecast(it)
+            weatherViewModel.requestForecast(it)
         }
     }
 
