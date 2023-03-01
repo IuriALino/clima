@@ -1,7 +1,6 @@
 package com.example.clima.data.source.remote.service
 
 import com.example.clima.BuildConfig
-import com.example.clima.data.source.remote.dto.ForeCastDTO
 import com.example.clima.data.source.remote.dto.WeatherDTO
 import com.example.clima.data.source.remote.Route
 import org.koin.core.component.KoinApiExtension
