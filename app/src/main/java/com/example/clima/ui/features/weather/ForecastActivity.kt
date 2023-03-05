@@ -77,5 +77,5 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
         }
     }
 
-    //override fun getViewBinding() = ActivityForecastBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityForecastBinding.inflate(layoutInflater)
 }
