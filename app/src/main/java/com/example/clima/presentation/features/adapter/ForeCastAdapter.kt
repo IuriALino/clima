@@ -1,9 +1,8 @@
-package com.example.clima.ui.features.adapter
+package com.example.clima.presentation.features.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clima.data.model.ForeCastModel
 import com.example.clima.databinding.RowItemForecastBinding
 import com.example.clima.domain.model.ForeCastDomain
 

@@ -1,7 +1,7 @@
 package com.example.clima
 
 import android.app.Application
-import com.example.clima.ui.di.Modules
+import com.example.clima.presentation.di.Modules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.component.KoinApiExtension

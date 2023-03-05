@@ -1,11 +1,11 @@
-package com.example.clima.ui.di
+package com.example.clima.presentation.di
 
 import android.content.Context
 import com.example.clima.data.di.databasemodule
 import com.example.clima.data.di.networkModule
 import com.example.clima.data.di.repositoryModule
 import com.example.clima.domain.di.useCaseModule
-import com.example.clima.ui.features.WeatherViewModel
+import com.example.clima.presentation.features.WeatherViewModel
 import com.example.clima.view.ProgressLoader
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.component.KoinApiExtension

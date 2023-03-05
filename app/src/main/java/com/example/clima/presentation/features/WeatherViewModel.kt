@@ -1,17 +1,13 @@
-package com.example.clima.ui.features
+package com.example.clima.presentation.features
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
-import com.example.clima.data.model.ForeCastModel
 import com.example.clima.domain.model.ForeCastDomain
 import com.example.clima.domain.model.WeatherDomain
 import com.example.clima.domain.usecase.forecast.ForeCastUseCase
 import com.example.clima.domain.usecase.forecast.GetForeCastUseCase
 import com.example.clima.domain.usecase.weather.FeatchWeatherUseCase
-import com.example.clima.ui.features.common.BaseViewModel
-import com.google.gson.JsonObject
+import com.example.clima.presentation.features.common.BaseViewModel
 import kotlinx.coroutines.flow.collect
 import org.koin.core.component.KoinApiExtension
 

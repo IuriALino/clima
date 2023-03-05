@@ -1,4 +1,4 @@
-package com.example.clima.ui.features.weather
+package com.example.clima.presentation.features.weather
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clima.R
 import com.example.clima.data.source.snackBarIndefinite
 import com.example.clima.databinding.ActivityForecastBinding
-import com.example.clima.ui.features.WeatherViewModel
-import com.example.clima.ui.features.adapter.ForeCastAdapter
-import com.example.clima.ui.features.common.BaseActivity
+import com.example.clima.presentation.features.WeatherViewModel
+import com.example.clima.presentation.features.adapter.ForeCastAdapter
+import com.example.clima.presentation.features.common.BaseActivity
 import com.example.clima.view.ProgressLoader
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
