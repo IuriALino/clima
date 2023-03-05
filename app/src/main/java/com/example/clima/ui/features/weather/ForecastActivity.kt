@@ -66,9 +66,9 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
         weatherViewModel.isLoading.observe(this) {
             progressLoader.setVisibility(it)
         }
-        weatherViewModel.errorMessage.observe(this) { error ->
+        weatherViewModel.showError.observe(this) { error ->
             intent.getStringExtra(ARG_MESSAGE_RES)?.let {
-//                weatherViewModel.getForecast(it)
+                weatherViewModel.getForeCast(it)
             }
             val msg = error ?: getString(R.string.error_invalid_response)
             binding.recyclerViewForecast.snackBarIndefinite(message = msg) { snackbar ->
@@ -77,5 +77,5 @@ class ForecastActivity : BaseActivity<ActivityForecastBinding>() {
         }
     }
 
-    override fun getViewBinding() = ActivityForecastBinding.inflate(layoutInflater)
+    //override fun getViewBinding() = ActivityForecastBinding.inflate(layoutInflater)
 }

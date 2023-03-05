@@ -8,6 +8,7 @@ import com.example.clima.data.model.ForeCastModel
 import com.example.clima.domain.model.ForeCastDomain
 import com.example.clima.domain.model.WeatherDomain
 import com.example.clima.domain.usecase.forecast.ForeCastUseCase
+import com.example.clima.domain.usecase.forecast.GetForeCastUseCase
 import com.example.clima.domain.usecase.weather.FeatchWeatherUseCase
 import com.example.clima.ui.features.common.BaseViewModel
 import com.google.gson.JsonObject
@@ -17,7 +18,8 @@ import org.koin.core.component.KoinApiExtension
 @KoinApiExtension
 class WeatherViewModel(
     private val weatherUseCase: FeatchWeatherUseCase,
-    private val foreCastUseCase: ForeCastUseCase
+    private val foreCastUseCase: ForeCastUseCase,
+    private val getForeCastUseCase: GetForeCastUseCase
 ) : BaseViewModel() {
 
     private val _openForeCastModel = MutableLiveData<List<ForeCastDomain>?>()
@@ -25,15 +27,6 @@ class WeatherViewModel(
 
     private val _openWeatherModel = MutableLiveData<WeatherDomain?>()
     val openWeatherModel: LiveData<WeatherDomain?> = _openWeatherModel
-
-    private val _error = MutableLiveData<JsonObject>()
-    val error: LiveData<JsonObject> = _error
-
-    val errorMessage = _error.switchMap {
-        liveData {
-            emit(it.get("message")?.asString)
-        }
-    }
 
     fun requestWeather(location: String) = doAsyncWork {
         weatherUseCase.execute(location).collect {
@@ -46,12 +39,10 @@ class WeatherViewModel(
             _openForeCastModel.postValue(it)
         }
     }
-}
 
-//    fun getForecast(location: String) {
-//        viewModelScope.launch(IO) {
-//            weatherRepository.getForecast(location).let {
-//                _openForeCastModel.postValue(it)
-//            }
-//        }
-//    }
+    fun getForeCast(location: String) = doAsyncWork {
+        getForeCastUseCase.execute(location).collect {
+            _openForeCastModel.postValue(it)
+        }
+    }
+}

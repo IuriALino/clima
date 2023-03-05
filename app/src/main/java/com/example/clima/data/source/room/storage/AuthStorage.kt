@@ -5,6 +5,7 @@ import com.example.clima.data.model.ForeCastModel
 import com.example.clima.data.source.removeSpecialCharacters
 import com.example.clima.data.source.room.dao.AuthDAO
 import com.example.clima.data.source.room.entity.WeatherEntity
+import com.example.clima.domain.model.ForeCastDomain
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.withContext
@@ -15,7 +16,7 @@ class AuthStorage(
     private val authDAO: AuthDAO
     ) {
 
-    suspend fun saveDataForeCast(foreCastModel: ForeCastModel) = withContext(IO + NonCancellable) {
+    suspend fun saveDataForeCast(foreCastModel: ForeCastDomain) = withContext(IO + NonCancellable) {
         authDAO.insert(
             WeatherEntity(
                 date = foreCastModel.date,

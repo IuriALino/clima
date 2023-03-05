@@ -93,7 +93,7 @@ class WeatherActivity : BaseActivity<ActivityWeatherBinding>() {
         weatherViewModel.isLoading.observe(this) {
             progressLoader.setVisibility(it)
         }
-        weatherViewModel.errorMessage.observe(this) { error ->
+        weatherViewModel.showError.observe(this) { error ->
             val msg = error ?: getString(R.string.error_invalid_response)
             binding.recyclerView.snackBarIndefinite(message = msg) { snackbar ->
                 snackbar.dismiss()

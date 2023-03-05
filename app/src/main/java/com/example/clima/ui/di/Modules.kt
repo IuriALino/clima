@@ -22,7 +22,8 @@ object Modules {
         viewModel {
             WeatherViewModel(
                 weatherUseCase = get(),
-                foreCastUseCase = get()
+                foreCastUseCase = get(),
+                getForeCastUseCase = get()
             )
         }
     }
